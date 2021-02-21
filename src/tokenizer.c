@@ -14,17 +14,14 @@ int non_space_char(char c){
 }
 
 char *word_start(char *str){
-  while(space_char(*str) && *str!='\0'){
+  while(space_char(*str)){
     str++;
-  }
-  if(*str=='\0'){
-    return 0;
   }
   return str;
 }
 
 char *word_end(char *str){
-  while(non_space_char(*str) && *str!='\0'){
+  while(non_space_char(*str)){
     str++;
   }
   if (*str == '\0'){
