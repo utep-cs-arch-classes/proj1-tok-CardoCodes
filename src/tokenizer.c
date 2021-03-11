@@ -1,9 +1,6 @@
 #include "tokenizer.h"
+#include <stdlib.h>
 #include <stdio.h>
-
-void main(){
-  //use to test fucntionality
-}
 
 int space_char(char c){
   if(c == ' ' || c == '\t' || c == '\n') // true if  c is a tab or space, and not zero.
@@ -54,12 +51,25 @@ char *copy_str(char *inStr, short len){
 }
 
 char **tokenize(char *str){
-  char **tokenized = (char**) malloc ((count_words(str)+1)*sizeof(char**));
-  char *begin, *end;
-  int length = 0;
+  char **tokenized;
+  tokenized = (char**)malloc((count_words(str)+1)*sizeof(char*));
+  char *begin;
+  char *end;
+
+  int len = 0;
   begin = word_start(str);
   int read = 0;
   
+  while(read <= count_words(str)){
+    end = word_end(begin);
+    len = end-begin;
+    tokenized[read] = copy_str(begin, len);
+    begin = word_start(end);
+
+    read++;
+  }
+
+  return tokenized;
 }
 
 void print_token(char **tokens){
@@ -71,6 +81,7 @@ void print_token(char **tokens){
 void free_tokens(char **tokens){
   int t = 0;
   while(tokens[t]){
+    printf("%s", tokens[t]);
     free(tokens[t]);
     t++;
   }
