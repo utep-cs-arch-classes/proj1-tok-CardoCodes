@@ -1,30 +1,46 @@
-#inlcude "history.h"
+#include "history.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 List* init_history(){
-  List *list = (List *) malloc(sizeof(List));
+  List *list;
   list = (List*) malloc(sizeof(List)*1);
   list->root = (Item*) malloc(sizeof(Item)*1);
   return list;
 }
 
 void add_history(List *list, char *str){
-  Item *current = list->root;
-  int id = 1;
-  while(current->null != NULL){
-    current = current->next;
-    id++;
+  Item *root = list->root;
+  Item *newRoot = (Item*)malloc(sizeof(Item)*1);
+  int newID;
+
+  if(root->str == NULL){
+    newID = 0;
+    root->id = newID;
+    root->str = str;
+    root->next = NULL;
+    return;
   }
-  current->next = (Item*)malloc(sizeof(Item));
-  current = current->next;
-  current->id = id;
-  current->str = str;
-  current->next = NULL;
+
+  while(root->next != NULL){
+    root = root->next;
+    newID;
+  }
+
+  newRoot->id = newID;
+  newRoot->str = str;
+  newRoot->next = NULL;
+  root->next = newRoot;
 }
 
-void *get_history(List *list, int id){
-
+char *get_history(List *list, int id){
+  Item *root = list->root;
+  while(root != NULL){
+    if(root->id == id){
+      return root->str;
+    }
+    root = root->next;
+  }
 }
 
 void print_history(List *list){
