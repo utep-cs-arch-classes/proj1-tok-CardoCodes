@@ -22,11 +22,12 @@ char *word_start(char *str){
   while(space_char(*str)){
     str++;
   }
+  printf("\n Word Start: %c", *str);
   return str;
 }
 
 char *word_end(char *str){
-  while(non_space_char(*str) && *str != '\0'){  // *str != '\0', pointer not at zero char.
+  while(non_space_char(*str)){  // *str != '\0', pointer not at zero char.
     str++;
   }
   return str;
@@ -34,10 +35,48 @@ char *word_end(char *str){
 
 int count_words(char *str){
   int count = 0;
-  while (*str != '\0'){
-    str = word_start(str);
+  while (*str != '\n'){
     str = word_end(str);
     count++;
   }
   return count;
 }
+
+char *copy_str(char *inStr, short len){
+  int counter = 0;
+  char *copy = (char*) malloc((len+1)*sizeof(char*));
+  while(counter<len){
+    copy[counter] = inStr[counter];
+    counter++;
+  }
+  copy[counter] ='\0';
+  return copy;
+}
+
+char **tokenize(char *str){
+  char **tokenized = (char**) malloc ((count_words(str)+1)*sizeof(char**));
+  char *begin, *end;
+  int length = 0;
+  begin = word_start(str);
+  int read = 0;
+  
+}
+
+void print_token(char **tokens){
+  for(int t=0; tokens[t]!="\0";t++){
+    printf("Tokens: %s \n", tokens[t]);
+  }
+}
+
+void free_tokens(char **tokens){
+  int t = 0;
+  while(tokens[t]){
+    free(tokens[t]);
+    t++;
+  }
+  free(tokens); //free all tokens
+}
+
+
+
+
