@@ -45,9 +45,9 @@ char *get_history(List *list, int id){
 
 void print_history(List *list){
   Item *temp = list->root;
-  while (temp->next != null){
+  while (temp->next != NULL){
     printf("\n%s", temp->str);
-    temp = temp.next;
+    temp = temp->next;
   }
 }
 

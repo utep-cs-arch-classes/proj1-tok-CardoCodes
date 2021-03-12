@@ -32,17 +32,14 @@ char *word_end(char *str){
 }
 
 int count_words(char *str){
-  int counter = 0;
-  for (char *p = str; *p != '\0'; p++){
-    if(*p == ' ' && *p != '\0')
-      p = word_end(p);
-    if(*p == ' ' && *p != '\0')
-      p = word_start(p); counter++; // everytime a new word start increment counter
-    if(p == NULL) //break if p == null and then return count.
-      break;
-  }
-  return counter;
+  if(word_start(str) == 0)
+    return 0;
+  if(*word_end(word_start(str)) == 0)
+    return 1;
+  return count_words(word_end(word_start(str)))+1;
+
 }
+
 
 char *copy_str(char *inStr, short len){
 
