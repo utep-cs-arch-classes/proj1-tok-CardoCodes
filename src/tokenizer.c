@@ -32,14 +32,15 @@ char *word_end(char *str){
 }
 
 int count_words(char *str){
-  int counter = 1;
-  while(*str != '\0'){
-    if(space_char(*str)){
-      counter++;
-    }
-    str++;
+  int counter = 0;
+  for (char *p = str; *p != '\0'; p++){
+    if(*p == ' ' && *p != '\0')
+      p = word_end(p);
+    if(*p == ' ' && *p != '\0')
+      p = word_start(p); counter++; // everytime a new word start increment counter
+    if(p == NULL) //break if p == null and then return count.
+      break;
   }
-  printf("\n Number of word Debug: %d", counter);
   return counter;
 }
 
