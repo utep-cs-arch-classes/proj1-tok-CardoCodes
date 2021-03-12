@@ -9,9 +9,9 @@ int space_char(char c){
 }
 
 int non_space_char(char c){
-  if( c != ' ' || c !='\t' || c !='\n' && c != '\0') //true if c is not a tab or space, not zero.
+  if(!space_char(c))
     return 1;
-  return 0;
+  else return 0;
 }
 
 char *word_start(char *str){
@@ -19,6 +19,7 @@ char *word_start(char *str){
     str++;
   if(*str == '\0')
     return 0;
+  printf("\n Word Start Debug: %d ", *str);
   return str;
 }
 
@@ -26,7 +27,7 @@ char *word_end(char *str){
   while(non_space_char(*str) && *str != '\0'){  // *str != '\0', pointer not at zero char.
     str++;
   }
-  printf("\n Word End: %c", *str);
+  printf("\n Word End Debug: %d", *str);
   return str;
 }
 
@@ -38,6 +39,7 @@ int count_words(char *str){
     }
     str++;
   }
+  printf("\n Number of word Debug: %d", counter);
   return counter;
 }
 
